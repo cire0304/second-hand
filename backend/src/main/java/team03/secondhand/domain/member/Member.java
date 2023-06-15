@@ -33,7 +33,7 @@ public class Member {
     private List<Product> products = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    private List<Watchlist> watchlistList = new ArrayList<>();
+    private List<Watchlist> watchlistArrayList = new ArrayList<>();
 
     // Getter and Setter methods
 }
