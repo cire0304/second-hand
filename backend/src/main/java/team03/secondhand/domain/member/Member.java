@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team03.secondhand.domain.product.Product;
+import team03.secondhand.domain.watchlist.Watchlist;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class Member {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<Watchlist> watchlistList = new ArrayList<>();
 
     // Getter and Setter methods
 }
