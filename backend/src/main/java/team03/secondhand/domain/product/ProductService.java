@@ -37,13 +37,12 @@ public class ProductService {
     private final MemberRepository memberRepository;
     private final ProductImgRepository productImgRepository;
     private final WatchlistRepository watchlistRepository;
+    private final AmazonS3Client amazonS3Client;
 
     @Value("${aws.bucketName}")
     private String S3Bucket; // Bucket 이름
     @Value("${aws.bucketFolderPath}")
     private String folderPath; // 폴더 경로
-    @Autowired
-    AmazonS3Client amazonS3Client;
 
     /**
      * Public Method
