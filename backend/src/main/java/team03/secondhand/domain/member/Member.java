@@ -51,6 +51,10 @@ public class Member {
         this.oauthId = oauthId;
     }
 
+    public void setLocation(List<Location> locations) {
+        memberAndLocations = new MemberAndLocations(this, locations);
+    }
+
     public void changeLocation(List<Location> locations, int mainLocationIndex) {
         memberAndLocations.changeLocation(locations, mainLocationIndex);
     }

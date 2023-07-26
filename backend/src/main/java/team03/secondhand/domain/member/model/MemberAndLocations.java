@@ -24,6 +24,13 @@ public class MemberAndLocations {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<MemberAndLocation> memberAndLocationList = new ArrayList<>();
 
+    public MemberAndLocations (Member member, List<Location> locations) {
+        memberAndLocationList.addAll(locations.stream()
+                .map(location -> new MemberAndLocation(member, location))
+                .collect(Collectors.toList()));
+        changeMainLocation(0);
+    }
+
     public void changeLocation(List<Location> locations, int mainLocationIndex) {
         Member member = memberAndLocationList.get(0).getMember();
         memberAndLocationList.clear();

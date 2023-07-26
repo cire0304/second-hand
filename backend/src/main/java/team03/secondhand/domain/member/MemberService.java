@@ -77,7 +77,7 @@ public class MemberService {
 
     private void setLocations(Member member, String searchKey) {
         List<Location> foundLocations = locationRepository.findByLocationShortening(searchKey);
-        member.changeLocation(foundLocations, 0); // TODO : 수정 필요
+        member.setLocation(foundLocations); // TODO : 수정 필요
     }
 
     private void isRegistrationBy(String oauthId) {
