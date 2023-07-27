@@ -31,9 +31,6 @@ public class MemberDataRequestDto {
         @NotEmpty(message = "동네를 설정해주세요")
         private List<Long> locationIdList = new ArrayList<>();
 
-        @NotNull
-        private Integer mainLocationIndex;
-
     }
 
 }
