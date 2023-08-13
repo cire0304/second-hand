@@ -37,6 +37,21 @@ public class ProductQueryRepository {
                 .fetchOne());
     }
 
+    public List<Product> getMemberProductsBy(Long memberId, ProductSearchCondition condition, Pageable pageable) {
+        return queryFactory
+                .select(product)
+                .from(product)
+                .join(product.category, category).fetchJoin()
+                .join(product.location, location).fetchJoin()
+                .where(locationIdEqual(condition.getLocationId())
+                        , categoryIdEqual(condition.getCategoryId())
+                        , memberIdEqual(memberId))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(product.updatedAt.desc())
+                .fetch();
+    }
+
     public List<Product> getProductsBy(ProductSearchCondition condition, Pageable pageable) {
         return queryFactory
                 .select(product)
@@ -49,6 +64,10 @@ public class ProductQueryRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(product.updatedAt.desc())
                 .fetch();
+    }
+
+    private BooleanExpression memberIdEqual(Long memberId) {
+        return memberId != null ? product.member.memberId.eq(memberId) : null;
     }
 
     private BooleanExpression locationIdEqual(Long locationId) {

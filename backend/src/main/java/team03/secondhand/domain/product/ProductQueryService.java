@@ -28,5 +28,13 @@ public class ProductQueryService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductInfoDTO> getMemberProductsBy(Long memberId, ProductSearchCondition condition, Pageable pageable) {
+        List<Product> products = productQueryRepository.getMemberProductsBy(memberId, condition, pageable);
+
+        return products.stream()
+                .map(product -> new ProductInfoDTO(memberId, product))
+                .collect(Collectors.toList());
+    }
+
 
 }
