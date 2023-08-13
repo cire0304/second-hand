@@ -42,6 +42,12 @@ public class ProductController {
         return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, productsDTO);
     }
 
+    @GetMapping("/myWatchProducts")
+    public DataResponse<List<ProductInfoDTO>> getWatchProductsBy(@RequestAttribute Long memberId, @ModelAttribute ProductSearchCondition condition, Pageable pageable) {
+        List<ProductInfoDTO> productsDTO = productQueryService.getWatchProductsBy(memberId, pageable);
+        return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, productsDTO);
+    }
+
     @GetMapping("/{productId}")
     public DataResponse<ProductDetailDTO> getDetailProductBy(@RequestAttribute Long memberId, @PathVariable Long productId) {
         ProductDetailDTO productDetailDTO = productService.getDetailProductBy(memberId, productId);

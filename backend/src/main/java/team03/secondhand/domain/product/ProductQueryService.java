@@ -36,5 +36,13 @@ public class ProductQueryService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductInfoDTO> getWatchProductsBy(Long memberId, Pageable pageable) {
+        List<Product> products = productQueryRepository.getWatchProductsBy(memberId, pageable);
+
+        return products.stream()
+                .map(product -> new ProductInfoDTO(memberId, product))
+                .collect(Collectors.toList());
+    }
+
 
 }

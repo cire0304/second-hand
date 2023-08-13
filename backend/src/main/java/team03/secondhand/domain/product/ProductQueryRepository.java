@@ -5,13 +5,16 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import team03.secondhand.domain.product.vo.ProductSearchCondition;
+import team03.secondhand.domain.watchlist.Watchlist;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static team03.secondhand.domain.category.QCategory.*;
 import static team03.secondhand.domain.location.QLocation.*;
+import static team03.secondhand.domain.watchlist.QWatchlist.*;
 import static team03.secondhand.domain.member.QMember.member;
 import static team03.secondhand.domain.product.QProduct.product;
 
@@ -46,6 +49,28 @@ public class ProductQueryRepository {
                 .where(locationIdEqual(condition.getLocationId())
                         , categoryIdEqual(condition.getCategoryId())
                         , memberIdEqual(memberId))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(product.updatedAt.desc())
+                .fetch();
+    }
+
+    public List<Product> getWatchProductsBy(Long memberId, Pageable pageable) {
+        List<Watchlist> watchLists = queryFactory.select(watchlist)
+                .from(watchlist)
+                .where(watchlist.member.memberId.eq(memberId))
+                .fetch();
+
+        List<Long> productIds = watchLists.stream()
+                .map(watch -> watch.getProduct().getProductId())
+                .collect(Collectors.toList());
+
+        return queryFactory
+                .select(product)
+                .from(product)
+                .join(product.category, category).fetchJoin()
+                .join(product.location, location).fetchJoin()
+                .where(product.productId.in(productIds))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(product.updatedAt.desc())
