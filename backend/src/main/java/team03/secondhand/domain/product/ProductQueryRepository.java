@@ -47,7 +47,7 @@ public class ProductQueryRepository {
                         ,categoryIdEqual(condition.getCategoryId()))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(product.productId.desc())
+                .orderBy(product.updatedAt.desc())
                 .fetch();
     }
 
