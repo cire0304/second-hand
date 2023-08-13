@@ -27,8 +27,4 @@ public abstract class Timestamped {
         updatedAt = now;
     }
 
-    @PreUpdate
-    private void preUpdate() {
-        updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-    }
 }
