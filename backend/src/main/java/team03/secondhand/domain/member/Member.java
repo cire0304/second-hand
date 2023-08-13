@@ -55,8 +55,8 @@ public class Member {
         memberAndLocations = new MemberAndLocations(this, locations);
     }
 
-    public void changeLocation(List<Location> locations, List<Long> mainLocationIndex) {
-        memberAndLocations.changeLocation(locations, mainLocationIndex);
+    public void changeLocation(List<Location> locations, List<Long> locationOrders) {
+        memberAndLocations.changeLocation(locations, locationOrders);
     }
 
     public List<MemberAndLocation> getMemberAndLocationList() {
