@@ -18,10 +18,12 @@ public class MemberDataResponseDto {
     @Setter
     @NoArgsConstructor
     public static class SimpleInfo {
+        private Long memberId;
         private String nickname;
         private String profileUrl;
 
         public SimpleInfo(Member member) {
+            this.memberId = member.getMemberId();
             this.nickname = member.getNickname();
             this.profileUrl = member.getProfileUrl();
         }
