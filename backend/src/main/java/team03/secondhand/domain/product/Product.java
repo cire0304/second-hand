@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import team03.secondhand.domain.category.Category;
 import team03.secondhand.domain.location.Location;
 import team03.secondhand.domain.member.Member;
+import team03.secondhand.domain.product.model.ProductImage;
 import team03.secondhand.domain.product.model.ProductWatchList;
 import team03.secondhand.domain.product.model.ProductImages;
 import team03.secondhand.model.Timestamped;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -87,6 +89,10 @@ public class Product extends Timestamped {
 
     public String getSellerNickname() {
         return member.getNickname();
+    }
+
+    public Boolean isSoldBy(Long memberId) {
+        return Objects.equals(member.getMemberId(), memberId);
     }
 
     public List<String> getImages() {

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import team03.secondhand.domain.BaseResponse;
 import team03.secondhand.domain.DataResponse;
 import team03.secondhand.domain.StatusCode;
 import team03.secondhand.domain.product.dto.ProductDataRequestDTO;
@@ -54,4 +55,9 @@ public class ProductController {
         return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, productDetailDTO);
     }
 
+    @DeleteMapping("/{productId}")
+    public DataResponse<Long> deleteProductBy(@RequestAttribute Long memberId, @PathVariable Long productId) {
+        productService.deleteProductBy(memberId,productId);
+        return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, productId);
+    }
 }

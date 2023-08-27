@@ -20,6 +20,7 @@ import team03.secondhand.util.imageUpload.ImageUploadModule;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -69,6 +70,19 @@ public class ProductService {
                 .orElseThrow(ProductError.NotFoundProduct::new);
         product.incrementLookupCount();
         return new ProductDetailDTO(memberId, product);
+    }
+
+    public boolean deleteProductBy(Long memberId, Long productId) {
+        Product product = productRepository
+                .findProductByProductId(productId)
+                .orElseThrow(ProductError.NotFoundProduct::new);
+
+        if (product.isSoldBy(memberId)) {
+            throw new IllegalArgumentException("본인 판매글이 아닙니다.");
+        }
+
+        productRepository.delete(product);
+        return true;
     }
 
     /**
