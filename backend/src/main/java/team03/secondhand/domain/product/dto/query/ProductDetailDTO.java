@@ -24,6 +24,7 @@ public class ProductDetailDTO {
     private Long chatRoomCount;
     private Integer watchlistCount;
     private Boolean isWatchlistChecked;
+    private Boolean isMine;
     private List<String> imageList;
     private int lookupCount;
 
@@ -33,6 +34,7 @@ public class ProductDetailDTO {
         this.contents = product.getContent();
         this.salesStatus = product.getSalesStatus();
         this.memberId = memberId;
+        this.isMine = product.isSoldBy(memberId);
         this.memberNickName = product.getSellerNickname();
         this.createAt = product.getCreatedAt();
         this.updatedAt = product.getUpdatedAt();
