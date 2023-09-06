@@ -17,12 +17,16 @@ public class ChatRoomDataResponseDto {
         private Long roomId;
         private Long productId;
         private Long sellerId;
+        private String sellerProfileUrl;
+        private String sellerNickName;
         private Long buyerId;
 
-        private Info(Long roomId, Long productId, Long sellerId, Long buyerId) {
+        private Info(Long roomId, Long productId, Long sellerId, String sellerProfileUrl, String sellerNickName , Long buyerId) {
             this.roomId = roomId;
             this.productId = productId;
             this.sellerId = sellerId;
+            this.sellerProfileUrl = sellerProfileUrl;
+            this.sellerNickName =  sellerNickName;
             this.buyerId = buyerId;
         }
 
@@ -30,6 +34,8 @@ public class ChatRoomDataResponseDto {
             return new Info(chatRoom.getChatroomId(),
                     chatRoom.getProduct().getProductId(),
                     chatRoom.getSeller().getMemberId(),
+                    chatRoom.getSeller().getProfileUrl(),
+                    chatRoom.getSeller().getNickname(),
                     chatRoom.getBuyer().getMemberId());
         }
     }

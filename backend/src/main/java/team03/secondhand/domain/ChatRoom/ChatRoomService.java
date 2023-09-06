@@ -67,4 +67,8 @@ public class ChatRoomService {
         return new ChatRoomDataResponseDto.ChatHistory(chatHistory);
     }
 
+    public void deleteChatRoom(Long roomId) {
+        chatRoomRepository.deleteById(roomId);
+    }
+
 }

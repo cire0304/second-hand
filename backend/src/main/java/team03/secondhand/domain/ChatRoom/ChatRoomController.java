@@ -62,6 +62,13 @@ public class ChatRoomController {
         return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, roomData);
     }
 
+    @DeleteMapping("/room/{roomId}")
+    @ResponseBody
+    public DataResponse<Long> deleteRoom(@PathVariable Long roomId) {
+        chatRoomService.deleteChatRoom(roomId);
+        return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, roomId);
+    }
+
     @ResponseBody
     @GetMapping("/room/history/{roomId}")
     public DataResponse<ChatRoomDataResponseDto.ChatHistory> chatHistory(@PathVariable Long roomId) {
