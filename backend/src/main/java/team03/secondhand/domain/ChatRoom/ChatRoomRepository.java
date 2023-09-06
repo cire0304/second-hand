@@ -19,4 +19,8 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             "WHERE (cr.seller.memberId = :memberId OR cr.buyer.memberId = :memberId) AND cr.product.productId = :productId")
     Optional<ChatRoom> findByMemberIdAndProductId(@Param("memberId") Long memberId, @Param("productId") Long productId);
 
+    @Query("SELECT count(*) From ChatRoom cr " +
+            "WHERE cr.product.productId = :productId")
+    Long getChatRoomCountBy(@Param("productId") Long productId);
+
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import team03.secondhand.domain.ChatRoom.ChatRoomRepository;
 import team03.secondhand.domain.category.Category;
 import team03.secondhand.domain.category.CategoryRepository;
 import team03.secondhand.domain.location.Location;
@@ -29,6 +30,7 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductQueryRepository productQueryRepository;
+    private final ChatRoomRepository chatRoomRepository;
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
     private final MemberRepository memberRepository;
@@ -69,7 +71,10 @@ public class ProductService {
         Product product = productQueryRepository.getDetailProductBy(productId)
                 .orElseThrow(ProductError.NotFoundProduct::new);
         product.incrementLookupCount();
-        return new ProductDetailDTO(memberId, product);
+
+        Long chatRoomCount = chatRoomRepository.getChatRoomCountBy(productId);
+
+        return new ProductDetailDTO(memberId, product, chatRoomCount);
     }
 
     public boolean deleteProductBy(Long memberId, Long productId) {
