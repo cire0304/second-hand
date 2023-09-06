@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
@@ -23,4 +24,8 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             "WHERE cr.product.productId = :productId")
     Long getChatRoomCountBy(@Param("productId") Long productId);
 
+    @Query("SELECT cr From ChatRoom cr " +
+            "WHERE cr.product.productId in (:productId)")
+    List<ChatRoom> getChatRoomsCountBy(@Param("productId") List<Long> productId);
+    
 }

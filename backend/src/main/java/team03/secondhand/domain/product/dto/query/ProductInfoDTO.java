@@ -22,13 +22,13 @@ public class ProductInfoDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public ProductInfoDTO(Long memberId, Product product) {
+    public ProductInfoDTO(Long memberId, Product product, Long chatRoomCount) {
         this.productId = product.getProductId();
         this.title = product.getTitle();
         this.price = product.getPrice();
         this.categoryTitle = product.getCategoryTitle();
         this.location = product.getLocationShortening();
-        this.chatRoomCount = 0L;
+        this.chatRoomCount = chatRoomCount;
         this.watchListCount = product.getWatchCount();
         this.isWatchlistChecked = product.isWatchedByMemberId(memberId);
         this.productMainImgUrl = product.getMainImage();
