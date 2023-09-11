@@ -7,16 +7,16 @@ import lombok.Getter;
 public class ProductDataResponseVO {
     private final String location;
     private final Long chatRoomCount;
-    private final Integer watchlistCount;
-    private final Boolean isWatchlistChecked;
+    private final Integer watchListCount;
+    private final Boolean isWatchListChecked;
     private final String productMainImgUrl;
 
     @Builder
-    public ProductDataResponseVO(String location, Long chatRoomCount, Integer watchlistCount, Boolean isWatchlistChecked, String productMainImgUrl) {
+    public ProductDataResponseVO(String location, Long chatRoomCount, Integer watchListCount, Boolean isWatchListChecked, String productMainImgUrl) {
         this.location = location;
         this.chatRoomCount = chatRoomCount;
-        this.watchlistCount = watchlistCount;
-        this.isWatchlistChecked = isWatchlistChecked;
+        this.watchListCount = watchListCount;
+        this.isWatchListChecked = isWatchListChecked;
         this.productMainImgUrl = productMainImgUrl;
     }
 }

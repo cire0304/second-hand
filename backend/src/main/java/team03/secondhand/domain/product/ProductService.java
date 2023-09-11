@@ -21,7 +21,6 @@ import team03.secondhand.util.imageUpload.ImageUploadModule;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -88,6 +87,30 @@ public class ProductService {
 
         productRepository.delete(product);
         return true;
+    }
+
+    public void updateSalesStatus(Long memberId, Long productId, String newStatus) {
+        Product product = productRepository
+                .findProductByProductId(productId)
+                .orElseThrow(ProductError.NotFoundProduct::new);
+
+        if (product.isSoldBy(memberId)) {
+            throw new IllegalArgumentException("본인 판매글이 아닙니다.(상태 수정)");
+        }
+
+        ProductState productStatus;
+        if (newStatus.equals("판매중")) {
+            productStatus = ProductState.판매중;
+        } else if (newStatus.equals("예약중")) {
+            productStatus = ProductState.예약중;
+        } else if (newStatus.equals("판매완료")) {
+            productStatus = ProductState.판매완료;
+        } else {
+            throw new IllegalArgumentException("해당하는 상태는 존재하지 않습니다.");
+        }
+
+        product.updateSalesStatus(productStatus);
+        productRepository.save(product);
     }
 
     /**

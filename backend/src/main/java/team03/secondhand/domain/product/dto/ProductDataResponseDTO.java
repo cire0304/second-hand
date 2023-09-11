@@ -33,8 +33,8 @@ public class ProductDataResponseDTO {
         private Integer price;
         private String location;
         private Long chatRoomCount;
-        private Integer watchlistCount;
-        private Boolean isWatchlistChecked;
+        private Integer watchListCount;
+        private Boolean isWatchListChecked;
         private String productMainImgUrl;
 
         public HomeInfo(Product product, ProductDataResponseVO responseVO) {
@@ -46,8 +46,8 @@ public class ProductDataResponseDTO {
             this.price = product.getPrice();
             this.location = responseVO.getLocation();
             this.chatRoomCount = responseVO.getChatRoomCount();
-            this.watchlistCount = responseVO.getWatchlistCount();
-            this.isWatchlistChecked = responseVO.getIsWatchlistChecked();
+            this.watchListCount = responseVO.getWatchListCount();
+            this.isWatchListChecked = responseVO.getIsWatchListChecked();
             this.productMainImgUrl = responseVO.getProductMainImgUrl();
         }
     }
@@ -64,8 +64,8 @@ public class ProductDataResponseDTO {
         private String categoryTitle;
         private String location;
         private Long chatRoomCount;
-        private Integer watchlistCount;
-        private Boolean isWatchlistChecked;
+        private Integer watchListCount;
+        private Boolean isWatchListChecked;
         private List<String> imageList;
 
         public DetailInfo(Product product, Long memberId) {
@@ -80,8 +80,8 @@ public class ProductDataResponseDTO {
             // TODO : VO 도입 생각
             this.location = product.getLocationShortening();
             this.categoryTitle = product.getCategoryTitle();
-            this.watchlistCount = product.getWatchCount();
-            this.isWatchlistChecked = product.isWatchedByMemberId(memberId);
+            this.watchListCount = product.getWatchCount();
+            this.isWatchListChecked = product.isWatchedByMemberId(memberId);
             this.imageList = product.getImages();
             // TODO : 채팅 기능 구현시 추가
             this.chatRoomCount = 0L;
