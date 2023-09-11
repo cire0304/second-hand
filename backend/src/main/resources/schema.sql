@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `chat`
     INDEX `fk_chat_member_idx` (`sender_id` ASC) VISIBLE,
     CONSTRAINT `fk_chat_chatroom`
         FOREIGN KEY (`chatroom_id`)
-            REFERENCES `chatroom` (`chatroom_id`),
+            REFERENCES `chatroom` (`chatroom_id`) ON DELETE CASCADE,
     CONSTRAINT `fk_chat_member`
         FOREIGN KEY (`sender_id`)
             REFERENCES `member` (`member_id`)
