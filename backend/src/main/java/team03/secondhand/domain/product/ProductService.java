@@ -81,7 +81,7 @@ public class ProductService {
                 .findProductByProductId(productId)
                 .orElseThrow(ProductError.NotFoundProduct::new);
 
-        if (product.isSoldBy(memberId)) {
+        if (!product.isSoldBy(memberId)) {
             throw new IllegalArgumentException("본인 판매글이 아닙니다.");
         }
 
@@ -94,7 +94,7 @@ public class ProductService {
                 .findProductByProductId(productId)
                 .orElseThrow(ProductError.NotFoundProduct::new);
 
-        if (product.isSoldBy(memberId)) {
+        if (!product.isSoldBy(memberId)) {
             throw new IllegalArgumentException("본인 판매글이 아닙니다.(상태 수정)");
         }
 

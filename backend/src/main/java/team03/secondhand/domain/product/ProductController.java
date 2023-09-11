@@ -62,7 +62,6 @@ public class ProductController {
 
     @PatchMapping("/{productId}/{status}")
     public DataResponse<Long> updateSalesStatus(@RequestAttribute Long memberId, @PathVariable Long productId, @PathVariable String status) {
-        log.info(String.valueOf(memberId));
         productService.updateSalesStatus(memberId, productId, status);
         return new DataResponse<>(StatusCode.RESPONSE_SUCCESS, productId);
     }

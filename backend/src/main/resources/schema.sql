@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `watchlist`
     INDEX `fk_watchlist_product_idx` (`product_id` ASC) VISIBLE,
     CONSTRAINT `fk_watchlist_product`
         FOREIGN KEY (`product_id`)
-            REFERENCES `product` (`product_id`),
+            REFERENCES `product` (`product_id`) ON DELETE CASCADE,
     CONSTRAINT `fk_watchlist_member`
         FOREIGN KEY (`member_id`)
             REFERENCES `member` (`member_id`)
