@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-import NavBarTitle from '../../components/NavBarTitle';
 import * as S from './styles';
+
+import NavBarTitle from '../../components/NavBarTitle';
 import useAsync from '../../hooks/useAsync';
 import { getCategory } from '../../api/category';
+
+// TODO : 카테고리 클릭시 카테고리 필터 기능 추가 적용
 
 interface Category {
   categoryId: number;

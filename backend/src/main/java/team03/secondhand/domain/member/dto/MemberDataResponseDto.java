@@ -9,23 +9,28 @@ import team03.secondhand.domain.memberAndLocation.dto.LocationData;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class MemberDataResponseDto {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class SimpleInfo {
+        private Long memberId;
         private String nickname;
         private String profileUrl;
 
         public SimpleInfo(Member member) {
+            this.memberId = member.getMemberId();
             this.nickname = member.getNickname();
             this.profileUrl = member.getProfileUrl();
         }
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class Info extends SimpleInfo {
         private List<LocationData.Info> locationDatas;
@@ -39,7 +44,8 @@ public class MemberDataResponseDto {
         }
     }
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class Join extends Info {
         private String jwt;

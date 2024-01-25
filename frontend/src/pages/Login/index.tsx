@@ -1,11 +1,14 @@
+import * as S from './styles';
+
 import { GITHUB_CLIENT_ID, GITHUB_OAUTH_URL } from '../../constants/login';
 import Button from '../../components/Button';
-import * as S from './styles';
 import NavBarTitle from '../../components/NavBarTitle';
 
 const Login = () => {
   const onLoginButtonClick = () => {
-    window.location.assign(`${GITHUB_OAUTH_URL}?client_id=${GITHUB_CLIENT_ID}`);
+    window.location.assign(
+      `${GITHUB_OAUTH_URL}?client_id=${GITHUB_CLIENT_ID}&prompt=consent`,
+    );
   };
 
   return (

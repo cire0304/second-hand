@@ -3,7 +3,86 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/63908856/243921798-d2e9633c-d94a-4e68-8001-b3b39b0de80e.png" width=550px/>
 
-# second-hand
+## 프로젝트 소개 👋
+
+```
+🎯 당근 마켓을 벤치마킹한 초기 모델 서비스를 구현했습니다.
+
+- 회원가입 후 상품을 '등록' 해보세요!  
+- 마음에 드는 상품을 관심상품에 '추가' 해보세요!
+- 채팅을 통해 판매자와 '거래' 를 할 수 있어요!
+- 카테고리 별 상품을 '조회' 해보세요!
+```
+
+## 기능 소개 🔍
+
+<details>
+  <summary>1. 홈</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/133c57fc-13a3-4284-818f-227279aab471/image.png" width="70%">
+</details>
+
+<details>
+  <summary>2. 로그인</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/3b67d83b-fbd4-446b-a75d-acf78ee5a6ab/image.png" width="70%">
+</details>
+
+<details>
+  <summary>3. 동네 설정</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/6614e3a6-d796-436e-bd23-06ffc02e462a/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/8581ea3b-7c01-49bf-8fd6-ff3203ccc03b/image.png" width="70%">
+</details>
+
+<details>
+  <summary>4. 카테고리</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/c2b8a938-2a5f-4702-88a7-a849b6cb925e/image.png" width="70%">
+</details>
+
+<details>
+  <summary>5. 상품 등록</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/de909834-d783-45ae-b764-867cc6646327/image.png" width="70%">
+</details>
+
+<details>
+  <summary>6. 상품 확인</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/c650477b-ce58-4a04-aca0-ff948f5ea92d/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/64a51fec-09e1-4906-a23f-41e1a115d9df/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/09ed0872-ce48-4107-9ff8-1591abd416dd/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/b2707cf4-f4f5-400d-a6a8-eeb1a2b76210/image.png" width="70%">
+</details>
+
+<details>
+  <summary>7. 판매 내역</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/9ae69d9e-cd84-48c1-aa5f-2425f8351799/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/e2bb3951-8e43-4462-ab3b-5da8e1f8f5e3/image.png" width="70%">
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/ee05ae7a-fdf3-4418-b000-5e490ea6b7c3/image.png" width="70%">
+</details>
+
+<details>
+  <summary>8. 관심 상품</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/2e94c77a-ccea-44de-88f2-190b7e817f0b/image.png" width="70%">
+</details>
+
+<details>
+  <summary>9. 채팅</summary>
+  <img src="https://velog.velcdn.com/images/sarang_daddy/post/f736c830-bc88-46f5-95da-2230ebc16124/image.png" width="70%">
+</details>
+
+<br>
+
+## API 명세서 📝
+
+API 명세서는 Postman의 documentation의 기능의 활용하여 관리하고 있습니다.
+
+[API 명세서](https://documenter.getpostman.com/view/26116797/2s93si2AeS#d40df49b-af53-42da-8479-ceb54d12807a)
+
+
+## EDR 설계 🗄
+![image](https://github.com/masters2023-2nd-project-03/second-hand/assets/20828490/588e7f53-5f76-49ff-9e75-61add7fc9bf8)
+
+![image](https://github.com/masters2023-2nd-project-03/second-hand/assets/20828490/0bcbf173-12a7-4231-a69a-c76d4019f39c)
+
+## 인프라 설계 📐
+![image](https://github.com/masters2023-2nd-project-03/second-hand/assets/80495427/91193061-f01d-4bdc-a253-b9c810f3261b)
 
 ## 👨‍👩‍👧‍👧 팀원 소개
 

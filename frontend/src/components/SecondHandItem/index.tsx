@@ -1,7 +1,8 @@
+import * as S from './styles';
+
 import Icon from '../Icon';
 import elapsedTime from '../../utils/elapsedTime';
-import formatNumber from '../../utils/formatNumber';
-import * as S from './styles';
+import { formatNumber } from '../../utils/formatNumber';
 import IconWithCount from './IconWithCount';
 
 interface SecondHandItemProps {
@@ -11,9 +12,10 @@ interface SecondHandItemProps {
   price: number | null;
   location: string;
   chatRoomCount: number;
-  watchListMemberIds: number[];
+  watchlistCount: number;
+  isWatchlistChecked: boolean;
   productMainImgUrl: string;
-  option?: boolean;
+  isSetEditOption?: boolean;
 }
 
 const SecondHandItem = ({
@@ -23,9 +25,10 @@ const SecondHandItem = ({
   price,
   location,
   chatRoomCount,
-  watchListMemberIds,
+  watchlistCount,
+  isWatchlistChecked,
   productMainImgUrl,
-  option = false,
+  isSetEditOption,
 }: SecondHandItemProps) => {
   return (
     <S.ItemContainer>
@@ -47,13 +50,23 @@ const SecondHandItem = ({
             </S.ColumnBot>
           </S.Content>
           <div className="Option">
-            {option && <Icon name={'ellipsis'} width={'17'} height={'20'} />}
+            {isSetEditOption && (
+              <Icon name={'ellipsis'} width={'17'} height={'20'} />
+            )}
           </div>
         </S.ItemContents>
         <S.ItemIssue>
-          <IconWithCount name={'message'} count={chatRoomCount} />
+          <IconWithCount
+            name={'message'}
+            count={chatRoomCount}
+            checked={false}
+          />
           <S.HeartIconWithCount>
-            {/* <IconWithCount name={'heart'} count={watchListMemberIds.length} /> */}
+            <IconWithCount
+              name={'heart'}
+              count={watchlistCount}
+              checked={isWatchlistChecked}
+            />
           </S.HeartIconWithCount>
         </S.ItemIssue>
       </S.ItemInfo>

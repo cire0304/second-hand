@@ -7,20 +7,19 @@ import lombok.NoArgsConstructor;
 import team03.secondhand.domain.category.Category;
 import team03.secondhand.domain.location.Location;
 import team03.secondhand.domain.member.Member;
-import team03.secondhand.domain.productImg.ProductImg;
-import team03.secondhand.domain.watchlist.Watchlist;
+import team03.secondhand.domain.product.model.ProductImages;
+import team03.secondhand.domain.product.model.ProductWatchList;
+import team03.secondhand.model.Timestamped;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Table(name = "product")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product {
+public class Product extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -36,16 +35,11 @@ public class Product {
     private String content;
 
     @Column(name = "lookup_count")
-    private final Integer lookupCount = 0;
+    private Integer lookupCount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "sales_status")
-    private final String salesStatus = "판매중";
-
-    @Column(name = "create_at")
-    private final LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-
-    @Column(name = "update_at")
-    private final LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+    private ProductState salesStatus = ProductState.판매중;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -59,12 +53,11 @@ public class Product {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product")
-    private final List<ProductImg> productImgList = new ArrayList<>();
+    @Embedded
+    private ProductImages productImages;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private final List<Watchlist> watchlistArrayList = new ArrayList<>();
-
+    @Embedded
+    private ProductWatchList productWatchList;
 
     @Builder
     public Product(String title, Integer price, String content, Category category, Location location, Member member) {
@@ -74,14 +67,52 @@ public class Product {
         this.category = category;
         this.location = location;
         this.member = member;
+        this.lookupCount = 0;
     }
 
-    public void addProductId(String imgUrl) {
-        productImgList.add(new ProductImg(imgUrl, this));
+    public String getCategoryTitle() {
+        return this.category.getTitle();
     }
 
-    public void clearProductId() {
-        productImgList.clear();
+    public String getLocationShortening() {
+        return this.location.getLocationShortening();
     }
+
+    public int getWatchCount() {
+        return productWatchList.getWatchCount();
+    }
+
+    public boolean isWatchedByMemberId(Long memberId) {
+        return productWatchList.isWatchedByMemberId(memberId);
+    }
+
+    public String getSellerNickname() {
+        return member.getNickname();
+    }
+
+    public Boolean isSoldBy(Long memberId) {
+        return Objects.equals(member.getMemberId(), memberId);
+    }
+
+    public List<String> getImages() {
+        return productImages.getImageUrlList();
+    }
+
+    public String getMainImage() {
+        return productImages.getMainImage();
+    }
+
+    public void changeImages(List<String> images) {
+        this.productImages = new ProductImages(images);
+    }
+
+    public void incrementLookupCount() {
+        lookupCount++;
+    }
+
+    public void updateSalesStatus(ProductState newStatus) {
+        this.salesStatus = newStatus;
+    }
+
 }
 

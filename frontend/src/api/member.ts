@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { BASE_URL } from '../constants/api';
+import { axiosInstanceWithoutBearer, axiosInstanceWithBearer } from './axios';
 
 export const postJoin = async (
   nickname: string,
@@ -11,9 +10,8 @@ export const postJoin = async (
   formData.append('oauthId', oauthId);
   formData.append('profileUrl', profileUrl, profileUrl.name);
 
-  //  TODO (시저) : 서버 배포후 주석 해제하고 밑에 axios 주석........
-  const res = await axios.post(
-    `http://3.39.207.31:8080/api/members/join`,
+  const res = await axiosInstanceWithoutBearer.post(
+    `/api/members/join`,
     formData,
     {
       headers: {
@@ -21,6 +19,27 @@ export const postJoin = async (
       },
     },
   );
-  console.log(res);
+
+  return res;
+};
+
+export const getMembers = async (token: string | null) => {
+  const res = await axiosInstanceWithBearer.get(`/api/members`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
+};
+
+export const getSeller = async (
+  token: string | null,
+  curRoomId: string | undefined,
+) => {
+  const res = await axiosInstanceWithBearer.get(`chat/room/${curRoomId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res;
 };

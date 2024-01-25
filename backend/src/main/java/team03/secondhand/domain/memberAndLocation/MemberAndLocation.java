@@ -14,7 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberAndLocation {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_location_id")
     private Long memberLocationId;
 
@@ -26,9 +27,31 @@ public class MemberAndLocation {
     @JoinColumn(name = "location_id")
     private Location location;
 
+    @Column(name = "main_location_status")
+    private boolean mainLocationState;
+
     public MemberAndLocation(Member member, Location location) {
         this.member = member;
         this.location = location;
     }
 
+    public long getLocationId() {
+        return location.getLocationId();
+    }
+
+    public String getLocationDetails() {
+        return location.getLocationDetails();
+    }
+
+    public String getLocationShortening() {
+        return  location.getLocationShortening();
+    }
+
+    public boolean isMainLocation() {
+        return mainLocationState;
+    }
+
+    public void setMainLocationState() {
+        mainLocationState = true;
+    }
 }

@@ -9,14 +9,17 @@ import team03.secondhand.domain.memberAndLocation.MemberAndLocation;
 public class LocationData {
     @Data
     public static class Info {
+        private long locationId;
         private String locationDetails;
-
         private String locationShortening;
+        private boolean mainLocationState;
 
         public Info(MemberAndLocation memberAndLocation) {
-            this.locationDetails = memberAndLocation.getLocation().getLocationDetails();
-            this.locationShortening = memberAndLocation.getLocation().getLocationShortening();
+            this.locationId = memberAndLocation.getLocationId();
+            this.locationDetails = memberAndLocation.getLocationDetails();
+            this.locationShortening = memberAndLocation.getLocationShortening();
+            this.mainLocationState = memberAndLocation.isMainLocation();
         }
     }
-    
+
 }

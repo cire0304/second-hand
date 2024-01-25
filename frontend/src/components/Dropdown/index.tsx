@@ -1,15 +1,32 @@
 import { useState } from 'react';
 
-import DropdownPanel from './DropdownPanel';
-import Icon from '../Icon';
 import * as S from './styles';
 
-interface DropdownProps {
-  options: string[];
+import DropdownPanel from './DropdownPanel';
+import Icon from '../Icon';
+
+interface LocationData {
+  locationDetails: string;
+  locationShortening: string;
 }
 
-const Dropdown = ({ options }: DropdownProps) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+interface DropdownProps {
+  options: LocationData[];
+  isSetLocationOption: boolean;
+  isReverse: boolean;
+}
+
+const Dropdown = ({
+  options,
+  isSetLocationOption,
+  isReverse,
+}: DropdownProps) => {
+  // TODO : 동네설정 state를 홈에서 받아와서 필터 해주기
+  const [selectedOption, setSelectedOption] = useState<string>(
+    options[0]?.locationShortening,
+  );
+
+  // TODO : 다른 곳 클릭하면 드롭다운 닫기 옵션 추가하기
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (option: string) => {
@@ -32,23 +49,25 @@ const Dropdown = ({ options }: DropdownProps) => {
       <S.DropdownWrapper />
       <S.DropdownHeader onClick={toggleDropdown}>
         <S.SelectedOption>{selectedOption}</S.SelectedOption>
-        <Icon name={'chevronDown'} width="17" />
+        {isReverse === false && <Icon name={'chevronDown'} width="17" />}
       </S.DropdownHeader>
       {isOpen && (
-        <S.PanelContainer>
+        <S.PanelContainer isReverse={isReverse}>
           {options.map((option, index) => (
             <DropdownPanel
               key={index}
-              option={option}
+              option={option.locationShortening}
               onClick={handleOptionClick}
             />
           ))}
-          <DropdownPanel
-            key={2}
-            option={'내 동네 변경하기'}
-            onClick={handleChangeOptionClick}
-            isLastPanel={true}
-          />
+          {isSetLocationOption && (
+            <DropdownPanel
+              key={2}
+              option={'내 동네 변경하기'}
+              onClick={handleChangeOptionClick}
+              isLastPanel={true}
+            />
+          )}
         </S.PanelContainer>
       )}
     </S.DropdownContainer>

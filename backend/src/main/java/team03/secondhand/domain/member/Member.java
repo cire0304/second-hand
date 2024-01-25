@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team03.secondhand.domain.location.Location;
+import team03.secondhand.domain.member.model.MemberAndLocations;
 import team03.secondhand.domain.memberAndLocation.MemberAndLocation;
 import team03.secondhand.domain.product.Product;
 import team03.secondhand.domain.watchlist.Watchlist;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -32,14 +35,14 @@ public class Member {
     @Column(name = "oauth_id")
     private String oauthId;
 
-    @OneToMany(mappedBy = "member" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberAndLocation> memberAndLocationList = new ArrayList<>();
+    @Embedded
+    private MemberAndLocations memberAndLocations;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    private List<Watchlist> watchlistArrayList = new ArrayList<>();
+    private final List<Watchlist> watchlistArrayList = new ArrayList<>();
 
     @Builder
     public Member(String nickname, String profileUrl, String oauthId) {
@@ -48,12 +51,16 @@ public class Member {
         this.oauthId = oauthId;
     }
 
-    public void addLocation(Location location) {
-        memberAndLocationList.add(new MemberAndLocation(this, location));
+    public void setLocation(List<Location> locations) {
+        memberAndLocations = new MemberAndLocations(this, locations);
     }
 
-    public void deleteAllLocation() {
-        memberAndLocationList.clear();
+    public void changeLocation(List<Location> locations, List<Long> locationOrders) {
+        memberAndLocations.changeLocation(locations, locationOrders);
+    }
+
+    public List<MemberAndLocation> getMemberAndLocationList() {
+        return memberAndLocations.getMemberAndLocationList();
     }
 
 }
