@@ -22,8 +22,8 @@ public class ProductDetailDTO {
     private String categoryTitle;
     private String location;
     private Long chatRoomCount;
-    private Integer watchlistCount;
-    private Boolean isWatchlistChecked;
+    private Integer watchListCount;
+    private Boolean isWatchListChecked;
     private Boolean isMine;
     private List<String> imageList;
     private int lookupCount;
@@ -43,8 +43,8 @@ public class ProductDetailDTO {
 
         this.location = product.getLocationShortening();
         this.categoryTitle = product.getCategoryTitle();
-        this.watchlistCount = product.getWatchCount();
-        this.isWatchlistChecked = product.isWatchedByMemberId(memberId);
+        this.watchListCount = product.getWatchCount();
+        this.isWatchListChecked = product.isWatchedByMemberId(memberId);
         this.imageList = product.getImages();
         // TODO : 채팅 기능 구현시 추가
         this.chatRoomCount = chatRoomCount;

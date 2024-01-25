@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 import team03.secondhand.domain.category.Category;
 import team03.secondhand.domain.location.Location;
 import team03.secondhand.domain.member.Member;
-import team03.secondhand.domain.product.model.ProductImage;
-import team03.secondhand.domain.product.model.ProductWatchList;
 import team03.secondhand.domain.product.model.ProductImages;
+import team03.secondhand.domain.product.model.ProductWatchList;
 import team03.secondhand.model.Timestamped;
 
 import javax.persistence.*;
@@ -40,7 +39,7 @@ public class Product extends Timestamped {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sales_status")
-    private final ProductState salesStatus = ProductState.판매중;
+    private ProductState salesStatus = ProductState.판매중;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -109,6 +108,10 @@ public class Product extends Timestamped {
 
     public void incrementLookupCount() {
         lookupCount++;
+    }
+
+    public void updateSalesStatus(ProductState newStatus) {
+        this.salesStatus = newStatus;
     }
 
 }
